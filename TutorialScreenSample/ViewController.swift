@@ -65,7 +65,7 @@ class ViewController: UIViewController {
 
     
     private func addObservers(){
-        NotificationCenter.default.addObserver(self, selector: #selector(startAnimating), name:NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(startAnimating), name:UIApplication.willEnterForegroundNotification, object: nil)
     }
     
     private func configureChildVCs(){
@@ -94,16 +94,16 @@ class ViewController: UIViewController {
     
     private func addInScrollView(childVC:FAChildVC){
 
-        childVC.willMove(toParentViewController: self)
+        childVC.willMove(toParent: self)
         scrollView.addSubview(childVC.view)
-        childVC.didMove(toParentViewController: self)
+        childVC.didMove(toParent: self)
     }
     
     
     
     //  MARK : Public Functions
     
-    func startAnimating(){
+    @objc func startAnimating(){
         
         if backGroundImageView.layer.animation(forKey: "center") == nil {
             backGroundImageView.layer.add(animationForXAxis(), forKey: "center")
